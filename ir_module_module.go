@@ -35,6 +35,7 @@ type IrModuleModule struct {
 	Shortdesc        *String    `xmlrpc:"shortdesc,omptempty"`
 	State            *Selection `xmlrpc:"state,omptempty"`
 	Summary          *String    `xmlrpc:"summary,omptempty"`
+	ToBuy            *Bool      `xmlrpc:"to_buy,omptempty"`
 	Url              *String    `xmlrpc:"url,omptempty"`
 	ViewsByModule    *String    `xmlrpc:"views_by_module,omptempty"`
 	Website          *String    `xmlrpc:"website,omptempty"`

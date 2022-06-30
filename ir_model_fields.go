@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// IrModelFields represents ir.model.fields model
+// IrModelFields represents ir.model.fields model.
 type IrModelFields struct {
 	LastUpdate       *Time      `xmlrpc:"__last_update,omptempty"`
 	Column1          *String    `xmlrpc:"column1,omptempty"`
@@ -47,18 +47,23 @@ type IrModelFields struct {
 	WriteUid         *Many2One  `xmlrpc:"write_uid,omptempty"`
 }
 
-// IrModelFieldss represents array of ir.model.fields model
+// IrModelFieldss represents array of ir.model.fields model.
 type IrModelFieldss []IrModelFields
 
-// IrModelFieldsModel is the odoo model name
+// IrModelFieldsModel is the odoo model name.
 const IrModelFieldsModel = "ir.model.fields"
+
+// Many2One convert IrModelFields to *Many2One.
+func (imf *IrModelFields) Many2One() *Many2One {
+	return NewMany2One(imf.Id.Get(), "")
+}
 
 // CreateIrModelFields creates a new ir.model.fields model and returns its id.
 func (c *Client) CreateIrModelFields(imf *IrModelFields) (int64, error) {
 	return c.Create(IrModelFieldsModel, imf)
 }
 
-// UpdateIrModelFields pdates an existing ir.model.fields record.
+// UpdateIrModelFields updates an existing ir.model.fields record.
 func (c *Client) UpdateIrModelFields(imf *IrModelFields) error {
 	return c.UpdateIrModelFieldss([]int64{imf.Id.Get()}, imf)
 }
@@ -88,7 +93,7 @@ func (c *Client) GetIrModelFields(id int64) (*IrModelFields, error) {
 	if imfs != nil && len(*imfs) > 0 {
 		return &((*imfs)[0]), nil
 	}
-	return nil, fmt.Errorf("id %v of %s not found", id, IrModelFieldsModel)
+	return nil, fmt.Errorf("id %v of ir.model.fields not found", id)
 }
 
 // GetIrModelFieldss gets ir.model.fields existing records.
@@ -100,6 +105,18 @@ func (c *Client) GetIrModelFieldss(ids []int64) (*IrModelFieldss, error) {
 	return imfs, nil
 }
 
+// FindIrModelFields finds ir.model.fields record by querying it with criteria.
+func (c *Client) FindIrModelFields(criteria *Criteria) (*IrModelFields, error) {
+	imfs := &IrModelFieldss{}
+	if err := c.SearchRead(IrModelFieldsModel, criteria, NewOptions().Limit(1), imfs); err != nil {
+		return nil, err
+	}
+	if imfs != nil && len(*imfs) > 0 {
+		return &((*imfs)[0]), nil
+	}
+	return nil, fmt.Errorf("ir.model.fields was not found")
+}
+
 // FindIrModelFieldss finds ir.model.fields records by querying it
 // and filtering it with criteria and options.
 func (c *Client) FindIrModelFieldss(criteria *Criteria, options *Options) (*IrModelFieldss, error) {
@@ -108,4 +125,26 @@ func (c *Client) FindIrModelFieldss(criteria *Criteria, options *Options) (*IrMo
 		return nil, err
 	}
 	return imfs, nil
+}
+
+// FindIrModelFieldsIds finds records ids by querying it
+// and filtering it with criteria and options.
+func (c *Client) FindIrModelFieldsIds(criteria *Criteria, options *Options) ([]int64, error) {
+	ids, err := c.Search(IrModelFieldsModel, criteria, options)
+	if err != nil {
+		return []int64{}, err
+	}
+	return ids, nil
+}
+
+// FindIrModelFieldsId finds record id by querying it with criteria.
+func (c *Client) FindIrModelFieldsId(criteria *Criteria, options *Options) (int64, error) {
+	ids, err := c.Search(IrModelFieldsModel, criteria, options)
+	if err != nil {
+		return -1, err
+	}
+	if len(ids) > 0 {
+		return ids[0], nil
+	}
+	return -1, fmt.Errorf("ir.model.fields was not found")
 }
