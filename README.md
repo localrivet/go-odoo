@@ -2,10 +2,10 @@
 
 An Odoo API client enabling Go programs to interact with Odoo in a simple and uniform way.
 
-[![GitHub license](https://img.shields.io/github/license/skilld-labs/go-odoo.svg)](https://github.com/skilld-labs/go-odoo/blob/master/LICENSE)
-[![GoDoc](https://godoc.org/github.com/skilld-labs/go-odoo?status.svg)](https://pkg.go.dev/github.com/skilld-labs/go-odoo?tab=doc)
-[![Go Report Card](https://goreportcard.com/badge/github.com/skilld-labs/go-odoo)](https://goreportcard.com/report/github.com/skilld-labs/go-odoo)
-[![GitHub issues](https://img.shields.io/github/issues/skilld-labs/go-odoo.svg)](https://github.com/skilld-labs/go-odoo/issues)
+[![GitHub license](https://img.shields.io/github/license/skilld-labs/go-odoo.svg)](https://github.com/localrivet/go-odoo/blob/master/LICENSE)
+[![GoDoc](https://godoc.org/github.com/localrivet/go-odoo?status.svg)](https://pkg.go.dev/github.com/localrivet/go-odoo?tab=doc)
+[![Go Report Card](https://goreportcard.com/badge/github.com/localrivet/go-odoo)](https://goreportcard.com/report/github.com/localrivet/go-odoo)
+[![GitHub issues](https://img.shields.io/github/issues/skilld-labs/go-odoo.svg)](https://github.com/localrivet/go-odoo/issues)
 
 ## Usage
 
@@ -27,12 +27,12 @@ export ODOO_MODELS="crm.lead"
 
 `ODOO_REPO_PATH` is the path where the repository will be downloaded (by default its GOPATH):
 ```
-export ODOO_REPO_PATH=$(echo $GOPATH | awk -F ':' '{ print $1 }')/src/github.com/skilld-labs/go-odoo
+export ODOO_REPO_PATH=$(echo $GOPATH | awk -F ':' '{ print $1 }')/src/github.com/localrivet/go-odoo
 ```
 
 Download library and generate models :
 ```
-GO111MODULE="off" go get github.com/skilld-labs/go-odoo
+GO111MODULE="off" go get github.com/localrivet/go-odoo
 cd $ODOO_REPO_PATH
 ls | grep -v "conversion.go\|generator\|go.mod\|go-odoo-generator\|go.sum\|ir_model_fields.go\|ir_model.go\|LICENSE\|odoo.go\|README.md\|types.go\|version.go" // keep only go-odoo core files
 GO111MODULE="off" go generate
@@ -62,7 +62,7 @@ If you're ok to work with those models, you can use this library instance, if no
 package main
 
 import (
-	odoo "github.com/skilld-labs/go-odoo"
+	odoo "github.com/localrivet/go-odoo"
 )
 
 func main() {
@@ -202,7 +202,7 @@ func (c *Client) ExecuteKw(method, model string, args []interface{}, options *Op
 
 ## Issues
 
-- If you have an issue, please report it on the [issue tracker](https://github.com/skilld-labs/go-odoo/issues)
+- If you have an issue, please report it on the [issue tracker](https://github.com/localrivet/go-odoo/issues)
 
 ## Contributors
 
