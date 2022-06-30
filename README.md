@@ -9,7 +9,6 @@ An Odoo API client enabling Go programs to interact with Odoo in a simple and un
 
 ## Usage
 
-
 ### Generate your models
 
 **Note: Generating models require to follow instructions in GOPATH mode. Refactoring for go modules will come soon.**
